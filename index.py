@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request
+import os
 
 app = Flask(__name__)
 
-OWM_API_KEY = "9f4c4d69db3a59cdaef140a4bb8d400d"
+OWM_API_KEY = os.getenv("WEATHER_KEY")
 
 import requests
 
