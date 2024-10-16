@@ -30,6 +30,8 @@
             backdrop-filter: blur(12px);
             background-color: rgba(185, 185, 185, 0.355);
             border-radius: 20px;
+            max-width: 401px;
+            width: 401px;
             border: 1px solid white;
             color: white;
             box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.13);
@@ -84,24 +86,33 @@
     </style>
 </head>
 <body>
-    <div class="center">
-        <form id="search" class="search-area">
-            <input id="city-geo" placeholder="Pesquise sua cidade"/>
-            <button type="submit">Pesquisar</button>
-        </form>
-    </div>
-    <div class="all-center">
-        <div class="glass">
-            <h1 style="font-size: 24px; display: flex; align-items: center; gap: 12px;"><img src="/static/pin.png" style="width: 32px;">{{weather.city_string}}</h1>
-            <hr style="background-color: white;">
-            <h2 align="center">Hoje</h2>
-            <div style="display: flex; align-items: center; justify-content: center;">
-                <img src="{{weather.icon_url}}">
-                <h3>{{weather.temp}}°</h3>
-            </div>
-            <p align="center">{{weather.desc}}</p>
+    {% if weather %}
+        <div class="center">
+            <form id="search" class="search-area">
+                <input id="city-geo" placeholder="Pesquise sua cidade"/>
+                <button type="submit">Pesquisar</button>
+            </form>
         </div>
-    </div>
+        <div class="all-center">
+            <div class="glass">
+                <h1 style="justify-content: center; font-size: 24px; display: flex; align-items: center; gap: 12px;"><img src="/static/pin.png" style="width: 32px;">{{weather.city_string}}</h1>
+                <hr style="background-color: white;">
+                <h2 align="center">Hoje</h2>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <img src="{{weather.icon_url}}">
+                    <h3>{{weather.temp}}°</h3>
+                </div>
+                <p align="center">{{weather.desc}}</p>
+            </div>
+        </div>
+    {% else %}
+        <div class="all-center">
+            <form id="search" class="search-area">
+                <input id="city-geo" placeholder="Pesquise sua cidade"/>
+                <button type="submit">Pesquisar</button>
+            </form>
+        </div>
+    {% endif %}
     <script>
         function searchCity(event) {
             let cityQuery = document.getElementById("city-geo").value;

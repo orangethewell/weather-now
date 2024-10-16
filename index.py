@@ -14,7 +14,6 @@ class Weather:
         self.icon_url = icon_url
         self.temp = temp
         
-
 def get_location(city_name, limit=5):
     url = f"http://api.openweathermap.org/geo/1.0/direct?q={city_name}&limit={limit}&appid={OWM_API_KEY}&lang=pt_br"
     response = requests.get(url)
@@ -53,7 +52,7 @@ def get_weather_information(query):
         return None
     
     return Weather(
-        f"{location_data['name']} - {location_data['state']}",
+        f"{location_data['name']}",
         weather_data["weather"][0]["description"],
         f" https://openweathermap.org/img/wn/{weather_data['weather'][0]['icon']}@2x.png",
         round(weather_data["main"]["temp"])
@@ -61,6 +60,9 @@ def get_weather_information(query):
 
 @app.route("/")
 def index():
+    if not OWM_API_KEY:
+        return "<h1>Ops, parece que não estamos conectados!</h1>"
+    
     query = request.args.get("q")
     temp = 0
 
