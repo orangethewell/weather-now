@@ -53,9 +53,9 @@ def get_weather_information(query):
         return None
     
     return Weather(
-        f"{location_data["name"]} - {location_data["state"]}",
+        f"{location_data['name']} - {location_data['state']}",
         weather_data["weather"][0]["description"],
-        f" https://openweathermap.org/img/wn/{weather_data["weather"][0]["icon"]}@2x.png",
+        f" https://openweathermap.org/img/wn/{weather_data['weather'][0]['icon']}@2x.png",
         round(weather_data["main"]["temp"])
     )
 
